@@ -36,7 +36,7 @@ done
 install_xray() {
     echo "开始安装 Xray..."
     echo "下载 Xray 安装包..."
-    wget -O xray-core.ipk "https://ghfast.top/https://github.com/Crying-Center/uni-demo1/blob/master/xray-core_25.1.30-r1_mipsel_24kc.ipk"
+    wget --no-check-certificate -O xray-core.ipk "https://ghfast.top/https://github.com/Crying-Center/uni-demo1/blob/master/xray-core_25.1.30-r1_mipsel_24kc.ipk"
     
     if [ $? -eq 0 ]; then
         echo "下载完成，开始安装..."
@@ -59,7 +59,7 @@ install_xray() {
 install_pw2() {
     echo "开始安装 Passwall2..."
     echo "下载 Passwall2 安装包..."
-    wget -O pw2-install.tar.gz "https://ghfast.top/https://github.com/Crying-Center/uni-demo1/raw/refs/heads/master/pw2-install-mipsel_24kc.tar.gz"
+    wget --no-check-certificate -O pw2-install.tar.gz "https://ghfast.top/https://github.com/Crying-Center/uni-demo1/raw/refs/heads/master/pw2-install-mipsel_24kc.tar.gz"
     
     if [ $? -eq 0 ]; then
         echo "下载完成，开始解压..."
