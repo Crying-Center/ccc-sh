@@ -29,9 +29,16 @@ echo "SS 端口: $RANDOM_PORT_SS | 密码: $RANDOM_PASS_SS"
 echo "Socks5 端口: $RANDOM_PORT_SOCKS | 用户名: $RANDOM_USER_SOCKS | 密码: $RANDOM_PASS_SOCKS"
 echo "----------------------------------------"
 
-# 3. 运行你提供的 sing-box 安装脚本
+# 3. 下载并运行 sing-box 安装脚本（修复了兼容性问题）
 echo "开始安装 sing-box..."
-bash <(wget -qO- -o- https://github.com/233boy/sing-box/raw/main/install.sh)
+wget -O sing-box-install.sh https://github.com/233boy/sing-box/raw/main/install.sh
+if [ $? -eq 0 ]; then
+    bash sing-box-install.sh
+    rm -f sing-box-install.sh
+else
+    echo "错误：下载 sing-box 安装脚本失败，请检查网络。"
+    exit 1
+fi
 
 # 检查 sb 命令是否安装成功
 if ! command -v sb &> /dev/null; then
@@ -40,7 +47,6 @@ if ! command -v sb &> /dev/null; then
 fi
 
 # 4. 使用 expect 自动化添加 SS 节点
-# 步骤：sb -> 1 -> 8 -> 端口 -> 密码
 echo "正在自动添加 Shadowsocks (SS) 节点..."
 expect <<EOF
 set timeout 30
@@ -55,7 +61,6 @@ EOF
 echo "----------------------------------------"
 
 # 5. 使用 expect 自动化添加 Socks5 节点
-# 步骤：sb -> 1 -> 21 -> 端口 -> 用户名 -> 密码
 echo "正在自动添加 Socks5 节点..."
 expect <<EOF
 set timeout 30
